@@ -1,6 +1,6 @@
 {
   "name": "logseq-plugin-google-fonts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Use Google Fonts for rendering",
   "main": "index.html",
   "scripts": {
