@@ -118,7 +118,7 @@ const applyStyles = () => {
       style: `
       /* title font */
       @import url('https://fonts.googleapis.com/css?family=${settings.title_font}');
-      #main-content-container .page-title .title {
+      #main-content-container .page-title .title, #main-content-container .journal-title .title {
         font-family: "${settings.title_font}", sans-serif !important;
         font-weight: ${settings.title_font_weight} !important;
         font-size: ${settings.title_font_size} !important;
