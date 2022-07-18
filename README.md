@@ -12,6 +12,7 @@ Google fonts have more than 1400+ fonts which can be used in Logseq now. You can
 
 - Support page title, main content and code block settings.
 - Support font family, font size, font weight and font color settings.
+- Support any web font.
 
 ## Buy me a coffee
 
