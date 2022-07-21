@@ -36,7 +36,15 @@ const defineSettings: SettingSchemaDesc[] = [
     key: "main_color",
     title: "Main font color",
     description: "Main font color",
-    default: "#000",
+    default: "#000000",
+    type: "string",
+    inputAs: "color",
+  },
+  {
+    key: "main_color_dark",
+    title: "Main font color in dark mode",
+    description: "Main font color in dark mode",
+    default: "#ffffff",
     type: "string",
     inputAs: "color",
   },
@@ -75,7 +83,15 @@ const defineSettings: SettingSchemaDesc[] = [
     key: "title_color",
     title: "Title font color",
     description: "Title font color",
-    default: "#000",
+    default: "#000000",
+    type: "string",
+    inputAs: "color",
+  },
+  {
+    key: "title_color_dark",
+    title: "Title font color in dark mode",
+    description: "Title font color in dark mode",
+    default: "#ffffff",
     type: "string",
     inputAs: "color",
   },
@@ -130,6 +146,12 @@ const applyStyles = () => {
         font-size: ${settings.main_font_size} !important;
         color: ${settings.main_color} !important;
       }
+      #main-content-container a.tag {
+        font-size: 1em !important;
+      }
+      html[data-theme=dark] #main-content-container {
+        color: ${settings.main_color_dark} !important;
+      }
       `,
     });
   } else {
@@ -153,6 +175,10 @@ const applyStyles = () => {
         font-weight: ${settings.title_font_weight} !important;
         font-size: ${settings.title_font_size} !important;
         color: ${settings.title_color} !important;
+      }
+
+      html[data-theme=dark] #main-content-container .page-title .title, html[data-theme=dark] #main-content-container .journal-title .title {
+        color: ${settings.title_color_dark} !important;
       }
       `,
     });
