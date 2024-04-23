@@ -21,7 +21,7 @@ const defineSettings: SettingSchemaDesc[] = [
   {
     key: "main_font_size",
     title: "Main font size",
-    description: "Main font color",
+    description: "Main font size",
     default: "1em",
     type: "string",
   },
@@ -68,7 +68,7 @@ const defineSettings: SettingSchemaDesc[] = [
   {
     key: "title_font_size",
     title: "Title font size",
-    description: "Title font color",
+    description: "Title font size",
     default: "33px",
     type: "string",
   },
@@ -114,7 +114,7 @@ const defineSettings: SettingSchemaDesc[] = [
   {
     key: "code_font_size",
     title: "Code font size",
-    description: "Code font color",
+    description: "Code font size",
     default: "14px",
     type: "string",
   },
@@ -140,11 +140,15 @@ const applyStyles = () => {
       style: `
       /* main font */
       @import url('${font_url}');
-      #main-content-container {
+      #main-content-container
+      {
         font-family: "${settings.main_font}", sans-serif !important;
         font-weight: ${settings.main_font_weight} !important;
         font-size: ${settings.main_font_size} !important;
         color: ${settings.main_color} !important;
+      }
+      #main-content-container .ls-block :is(h1,h2,h3,h4,h5,h6) {
+        font-weight: ${settings.main_font_weight} !important;
       }
       #main-content-container a.tag {
         font-size: 1em !important;

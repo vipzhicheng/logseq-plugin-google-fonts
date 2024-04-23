@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.0.5
+
+- fix: settings typo.
+- fix: header weight not take effect.
+- fix: adjust readme.
+
 ## v0.0.4
 
 - feat: support dark theme font color settings

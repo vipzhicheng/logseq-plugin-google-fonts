@@ -11,12 +11,12 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^4.7.4",
-    "vite": "^2.9.12",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10",
     "vite-plugin-logseq": "^1.1.2"
   },
   "dependencies": {
-    "@logseq/libs": "^0.0.6"
+    "@logseq/libs": "^0.0.17"
   },
   "logseq": {
     "id": "logseq-plugin-google-fonts",
