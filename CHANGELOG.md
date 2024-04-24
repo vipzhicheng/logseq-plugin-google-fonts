@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v0.1.0
+
+- feat: add multi fonts support for google
+- feat: add css font settings
+
 ## v0.0.5
 
 - fix: settings typo.

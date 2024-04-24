@@ -6,7 +6,7 @@ const defineSettings: SettingSchemaDesc[] = [
     key: "main_font",
     title: "Main font name",
     description:
-      "You can choose font from https://fonts.google.com. Change back to empty to disable applied font",
+      "You can choose font from https://fonts.google.com. Change back to empty to disable applied font. The format is: A|B|C, the fonts will be used orderly.",
     default: "",
     type: "string",
   },
@@ -17,6 +17,15 @@ const defineSettings: SettingSchemaDesc[] = [
       "The font CDN makes you load even faster, and/or even from non-google source. Leave empty to disable this feature.",
     default: "",
     type: "string",
+  },
+  {
+    key: "main_font_css",
+    title: "Main font CSS",
+    description:
+      "The font CSS makes you load font by css. Leave empty to disable this feature. Must be valid CSS syntax!",
+    default: "",
+    type: "string",
+    inputAs: "textarea",
   },
   {
     key: "main_font_size",
@@ -53,7 +62,7 @@ const defineSettings: SettingSchemaDesc[] = [
     key: "title_font",
     title: "Title font name",
     description:
-      "You can choose font from https://fonts.google.com. Change back to empty to disable applied font",
+      "You can choose font from https://fonts.google.com. Change back to empty to disable applied font.  The format is: A|B|C, the fonts will be used orderly.",
     default: "",
     type: "string",
   },
@@ -64,6 +73,15 @@ const defineSettings: SettingSchemaDesc[] = [
       "The font CDN makes you load even faster, and/or even from non-google source. Leave empty to disable this feature.",
     default: "",
     type: "string",
+  },
+  {
+    key: "title_font_css",
+    title: "Title font CSS",
+    description:
+      "The font CSS makes you load font by css. Leave empty to disable this feature. Must be valid CSS syntax!",
+    default: "",
+    type: "string",
+    inputAs: "textarea",
   },
   {
     key: "title_font_size",
@@ -99,7 +117,7 @@ const defineSettings: SettingSchemaDesc[] = [
     key: "code_font",
     title: "Code font name",
     description:
-      "You can choose font from https://fonts.google.com. Change back to empty to disable applied font",
+      "You can choose font from https://fonts.google.com. Change back to empty to disable applied font.  The format is: A|B|C, the fonts will be used orderly.",
     default: "",
     type: "string",
   },
@@ -110,6 +128,15 @@ const defineSettings: SettingSchemaDesc[] = [
       "The font CDN makes you load even faster, and/or even from non-google source. Leave empty to disable this feature.",
     default: "",
     type: "string",
+  },
+  {
+    key: "code_font_css",
+    title: "Code font CSS",
+    description:
+      "The font CSS makes you load font by css. Leave empty to disable this feature. Must be valid CSS syntax!",
+    default: "",
+    type: "string",
+    inputAs: "textarea",
   },
   {
     key: "code_font_size",
@@ -135,14 +162,28 @@ const applyStyles = () => {
     const font_url =
       settings.main_font_cdn ||
       `https://fonts.googleapis.com/css?family=${settings.main_font}`;
+
+    const fonts = (settings.main_font as string)
+      .split("|")
+      .map((font) => `"${font}"`)
+      .join(", ");
+
     logseq.provideStyle({
       key: "main-font",
       style: `
       /* main font */
       @import url('${font_url}');
+      ${
+        settings.main_font.split("|").length > 1 && settings.main_font_cdn
+          ? "@import url('https://fonts.googleapis.com/css?family=" +
+            settings.main_font +
+            "');"
+          : ""
+      }
+      ${settings.main_font_css ? settings.main_font_css + "" : ""}
       #main-content-container
       {
-        font-family: "${settings.main_font}", sans-serif !important;
+        font-family: ${fonts}, sans-serif !important;
         font-weight: ${settings.main_font_weight} !important;
         font-size: ${settings.main_font_size} !important;
         color: ${settings.main_color} !important;
@@ -169,13 +210,26 @@ const applyStyles = () => {
     const font_url =
       settings.title_font_cdn ||
       `https://fonts.googleapis.com/css?family=${settings.title_font}`;
+
+    const fonts = (settings.title_font as string)
+      .split("|")
+      .map((font) => `"${font}"`)
+      .join(", ");
     logseq.provideStyle({
       key: "title-font",
       style: `
       /* title font */
       @import url('${font_url}');
+      ${
+        settings.title_font.split("|").length > 1 && settings.title_font_cdn
+          ? "@import url('https://fonts.googleapis.com/css?family=" +
+            settings.title_font +
+            "');"
+          : ""
+      }
+      ${settings.title_font_css ? settings.title_font_css + "" : ""}
       #main-content-container .page-title .title, #main-content-container .journal-title .title {
-        font-family: "${settings.title_font}", sans-serif !important;
+        font-family: ${fonts}, sans-serif !important;
         font-weight: ${settings.title_font_weight} !important;
         font-size: ${settings.title_font_size} !important;
         color: ${settings.title_color} !important;
@@ -197,13 +251,26 @@ const applyStyles = () => {
     const font_url =
       settings.code_font_cdn ||
       `https://fonts.googleapis.com/css?family=${settings.code_font}`;
+
+    const fonts = (settings.code_font as string)
+      .split("|")
+      .map((font) => `"${font}"`)
+      .join(", ");
     logseq.provideStyle({
       key: "code-font",
       style: `
       /* code font */
       @import url('${font_url}');
+      ${
+        settings.code_font.split("|").length > 1 && settings.code_font_cdn
+          ? "@import url('https://fonts.googleapis.com/css?family=" +
+            settings.code_font +
+            "');"
+          : ""
+      }
+      ${settings.code_font_css ? settings.code_font_css + "" : ""}
       .CodeMirror pre.CodeMirror-line, .CodeMirror-gutter, .CodeMirror-gutters, .CodeMirror-linenumber, .CodeMirror-scroll, .CodeMirror-sizer {
-        font-family: "${settings.code_font}", sans-serif !important;
+        font-family: ${fonts}, sans-serif !important;
         font-weight: ${settings.code_font_weight} !important;
         font-size: ${settings.code_font_size} !important;
         color: ${settings.code_color} !important;
